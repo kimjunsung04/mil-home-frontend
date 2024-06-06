@@ -34,7 +34,7 @@ export default function TopMenu({
             </div>
             <div className="top-menu">
                 <div className="top-menu-chip">
-                    <FaFilter size={30} color="#83ad97" />
+                    <FaFilter size={25} color="#83ad97" />
                     {chips.map((chip, index) => (
                         <Chip
                             key={index}
