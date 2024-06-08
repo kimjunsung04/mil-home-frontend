@@ -7,30 +7,56 @@ export default function TopMenu({
     nowGpsLocationGet,
     nowChoiceChip,
     setNowChoiceChip,
+    sliderValue,
+    setSliderValue,
+    gradient,
+    setGradient,
+    handleChange,
 }) {
     const chips = [
-        { text: '주변 관광지', onClick: () => setNowChoiceChip(0) },
-        { text: '주변 영외 PX', onClick: () => setNowChoiceChip(1) },
-        { text: '가격', onClick: () => setNowChoiceChip(2) },
+        {
+            text: '주변 관광지',
+            onClick: () => {
+                //원래 0이 있었으면 0을 없애고 없었으면 0을 추가  리스트형태임
+                if (nowChoiceChip.includes(0)) {
+                    setNowChoiceChip(
+                        nowChoiceChip.filter((chip) => chip !== 0)
+                    );
+                } else {
+                    setNowChoiceChip([...nowChoiceChip, 0]);
+                }
+            },
+        },
+        {
+            text: '주변 영외 PX',
+            onClick: () => {
+                if (nowChoiceChip.includes(1)) {
+                    setNowChoiceChip(
+                        nowChoiceChip.filter((chip) => chip !== 1)
+                    );
+                } else {
+                    setNowChoiceChip([...nowChoiceChip, 1]);
+                }
+            },
+        },
+        {
+            text: '가격',
+            onClick: () => {
+                if (nowChoiceChip.includes(2)) {
+                    setNowChoiceChip(
+                        nowChoiceChip.filter((chip) => chip !== 2)
+                    );
+                } else {
+                    setNowChoiceChip([...nowChoiceChip, 2]);
+                }
+            },
+        },
     ];
-
-    const [gradient, setGradient] = useState(
-        'linear-gradient(to right, #3e5247 0%, #3e5247 0%, #d4d4d4 0%, #d4d4d4 100%)'
-    );
-    const [sliderValue, setSliderValue] = useState(0);
-
-    const handleChange = (event) => {
-        const { max, value } = event.target;
-        const gradientPercentage = (value / max) * 100;
-        const newGradient = `linear-gradient(to right, #3e5247 0%, #3e5247 ${gradientPercentage}%, #d4d4d4 ${gradientPercentage}%, #d4d4d4 100%)`;
-        setGradient(newGradient);
-        setSliderValue(value);
-    };
 
     return (
         <div>
             <div className="top-logo">
-                <img src="/img/logo.png" alt="logo" width={80} height={80} />
+                <img src="/img/logo.png" alt="logo" width={70} height={70} />
             </div>
             <div className="top-menu">
                 <div className="top-menu-chip">
@@ -39,15 +65,21 @@ export default function TopMenu({
                         <Chip
                             key={index}
                             onClick={chip.onClick}
-                            checked={nowChoiceChip === index}
+                            checked={nowChoiceChip.includes(index)}
                         >
                             {chip.text}
                         </Chip>
                     ))}
                 </div>
-                {nowChoiceChip === 2 && (
+                {nowChoiceChip.includes(2) && (
                     <div className="top-menu-price">
-                        <div className="price-text">나의 범위 설정</div>
+                        <div className="price-text">
+                            나의 범위 설정(0원 ~{' '}
+                            {sliderValue
+                                .toString()
+                                .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                            원)
+                        </div>
                         <input
                             type="range"
                             className="price-range"
@@ -58,6 +90,10 @@ export default function TopMenu({
                             onChange={handleChange}
                             style={{ background: gradient }}
                         />
+                        <div className="price-guide-container">
+                            <div className="price-guide-left">0원</div>
+                            <div className="price-guide-right">100,000원</div>
+                        </div>
                     </div>
                 )}
             </div>

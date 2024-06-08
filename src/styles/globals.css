@@ -6,7 +6,7 @@
     position: fixed;
     top: 0;
     right: 0;
-    z-index: 1000;
+    z-index: 2;
     margin-right: 15px;
 }
 
@@ -15,8 +15,8 @@
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1000;
-    margin: 80px 15px;
+    z-index: 2;
+    margin: 65px 15px;
     background-color: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 0.5rem 1rem;
@@ -31,7 +31,7 @@
     position: fixed;
     bottom: 0;
     right: 0;
-    z-index: 1000;
+    z-index: 2;
     margin: 50px 15px;  
     background-color: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -136,5 +136,23 @@
     display: flex;
     justify-content: space-between;
     font-size: 17px;
+    font-weight: bold;
+}
+
+.price-guide-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.price-guide-left {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+}
+
+.price-guide-right {
+    display: flex;
+    align-items: center;
     font-weight: bold;
 }
